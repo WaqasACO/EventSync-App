@@ -1,5 +1,4 @@
 # EventSync
-# EventSync
 
 ## Project Overview
 EventSync is a native Android application designed to streamline campus event management. It provides a centralized, role-based platform for two types of users:
