@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/apk/res/android">
+    <style name="Base.Theme.EventSync" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+    <style name="Theme.EventSync" parent="Base.Theme.EventSync" />
+</resources>
