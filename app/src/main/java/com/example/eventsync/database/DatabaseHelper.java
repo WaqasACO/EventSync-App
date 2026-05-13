@@ -20,6 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Table Names
     private static final String TABLE_USERS = "users";
     private static final String TABLE_EVENTS = "events";
+    private static final String TABLE_ATTENDEES = "event_attendees";
 
     // Common column names
     private static final String KEY_ID = "id";
@@ -37,6 +38,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_EVENT_TIME = "time";
     private static final String KEY_EVENT_LOCATION = "location";
     private static final String KEY_EVENT_CREATOR_ID = "creatorId";
+
+    // EVENT_ATTENDEES Table - column names
+    private static final String KEY_ATTENDEE_EVENT_ID = "eventId";
+    private static final String KEY_ATTENDEE_USER_ID = "userId";
 
     // Table Create Statements
     // Users table create statement
@@ -57,6 +62,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_EVENT_LOCATION + " TEXT,"
             + KEY_EVENT_CREATOR_ID + " TEXT" + ")";
 
+    // Attendees table create statement
+    private static final String CREATE_TABLE_ATTENDEES = "CREATE TABLE " + TABLE_ATTENDEES + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + KEY_ATTENDEE_EVENT_ID + " TEXT,"
+            + KEY_ATTENDEE_USER_ID + " TEXT" + ")";
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -66,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // creating required tables
         db.execSQL(CREATE_TABLE_USERS);
         db.execSQL(CREATE_TABLE_EVENTS);
+        db.execSQL(CREATE_TABLE_ATTENDEES);
     }
 
     @Override
@@ -73,6 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ATTENDEES);
 
         // create new tables
         onCreate(db);
@@ -168,5 +181,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int deleteEvent(String eventId) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_EVENTS, KEY_ID + " = ?", new String[]{eventId});
+    }
+
+    // ------------------------ "ATTENDEES" table methods ----------------//
+
+    /**
+     * Add attendee to an event
+     */
+    public long addAttendee(String eventId, String userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ATTENDEE_EVENT_ID, eventId);
+        values.put(KEY_ATTENDEE_USER_ID, userId);
+
+        return db.insert(TABLE_ATTENDEES, null, values);
+    }
+
+    /**
+     * Get all user IDs attending a specific event
+     */
+    public List<String> getAttendeesForEvent(String eventId) {
+        List<String> userIds = new ArrayList<>();
+        String selectQuery = "SELECT " + KEY_ATTENDEE_USER_ID + " FROM " + TABLE_ATTENDEES
+                + " WHERE " + KEY_ATTENDEE_EVENT_ID + " = ?";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{eventId});
+
+        if (cursor.moveToFirst()) {
+            do {
+                userIds.add(cursor.getString(cursor.getColumnIndexOrThrow(KEY_ATTENDEE_USER_ID)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return userIds;
+    }
+
+    /**
+     * Remove attendee from an event
+     */
+    public int removeAttendee(String eventId, String userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_ATTENDEES, KEY_ATTENDEE_EVENT_ID + " = ? AND " + KEY_ATTENDEE_USER_ID + " = ?",
+                new String[]{eventId, userId});
     }
 }

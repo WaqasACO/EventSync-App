@@ -84,4 +84,30 @@ public class DatabaseHelperTest {
         assertEquals(1, rowsDeleted);
         assertEquals(0, events.size());
     }
+
+    @Test
+    public void testAttendeeCRUD() {
+        // Arrange
+        String eventId = "e1";
+        String userId1 = "u1";
+        String userId2 = "u2";
+
+        // Act
+        databaseHelper.addAttendee(eventId, userId1);
+        databaseHelper.addAttendee(eventId, userId2);
+        List<String> attendees = databaseHelper.getAttendeesForEvent(eventId);
+
+        // Assert
+        assertEquals(2, attendees.size());
+        assertTrue(attendees.contains(userId1));
+        assertTrue(attendees.contains(userId2));
+
+        // Act - Remove
+        databaseHelper.removeAttendee(eventId, userId1);
+        attendees = databaseHelper.getAttendeesForEvent(eventId);
+
+        // Assert - After removal
+        assertEquals(1, attendees.size());
+        assertFalse(attendees.contains(userId1));
+    }
 }
