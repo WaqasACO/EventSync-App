@@ -1,27 +1,29 @@
 package com.example.eventsync.viewmodel;
 
+import android.content.Context;
+
 import com.example.eventsync.models.Event;
 import com.example.eventsync.repository.EventRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class EventViewModel {
 
     private EventRepository repository;
 
-    public EventViewModel() {
-        repository = new EventRepository();
+    public EventViewModel(Context context) {
+        repository = new EventRepository(context);
     }
 
-    public void addEvent(Event event) {
-        repository.addEvent(event);
+    public long addEvent(Event event) {
+        return repository.addEvent(event);
     }
 
-    public ArrayList<Event> getAllEvents() {
+    public List<Event> getAllEvents() {
         return repository.getAllEvents();
     }
 
-    public void deleteEvent(String eventID) {
-        repository.deleteEvent(eventID);
+    public int deleteEvent(String eventID) {
+        return repository.deleteEvent(eventID);
     }
 }
