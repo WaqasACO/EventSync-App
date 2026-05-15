@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Event Title -->
+        <TextView
+            android:id="@+id/textDetailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingBottom="8dp"/>
+
+        <!-- Date -->
+        <TextView
+            android:id="@+id/textDetailDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:paddingBottom="4dp"/>
+
+        <!-- Time -->
+        <TextView
+            android:id="@+id/textDetailTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:paddingBottom="4dp"/>
+
+        <!-- Location -->
+        <TextView
+            android:id="@+id/textDetailLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:paddingBottom="12dp"/>
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/textDetailDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:paddingBottom="24dp"/>
+
+        <!-- Join/Leave Button -->
+        <Button
+            android:id="@+id/buttonJoin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Join Event"
+            android:backgroundTint="#3F51B5"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Comments Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comments"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/editComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Write a comment..."
+            android:background="@android:color/white"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/buttonComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Post Comment"
+            android:backgroundTint="#3F51B5"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/textComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#444444"/>
+
+    </LinearLayout>
+
+</ScrollView>
