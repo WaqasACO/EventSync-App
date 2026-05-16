@@ -19,7 +19,9 @@ This application strictly follows the **MVVM (Model-View-ViewModel)** architectu
 4. Run the application on an Android Emulator (API 24+) or a physical device.
 
 ## Challenges and Solutions (Demo 3 & 4)
-* **Challenge 1:** [To be filled out during development]
-* **Solution 1:** [To be filled out during development]
-* **Challenge 2:** [To be filled out during development]
-* **Solution 2:** [To be filled out during development]
+* **Challenge 1: Build Configuration & Asset Management**
+    * **Issue:** Integration of team-contributed code resulted in build failures due to missing AndroidX configurations and deleted/untracked launcher icons.
+    * **Solution:** Created `gradle.properties` to enable AndroidX/Jetifier and generated placeholder adaptive icons to restore project buildability.
+* **Challenge 2: Integration of Disconnected Modules**
+    * **Issue:** New Participant UI screens were not registered in the `AndroidManifest.xml`, and the starting `MainActivity` was still a blank placeholder.
+    * **Solution:** Manually registered all new activities and updated `MainActivity` to automatically initialize sample SQLite data and redirect to the `ParticipantDashboardActivity`.
