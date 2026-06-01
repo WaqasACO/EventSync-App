@@ -1,5 +1,32 @@
 # EventSync
 
+---
+
+## 📅 Assignment 4 Development Plan & Status
+
+To demonstrate structured development practices, our team is executing the Assignment 4 finalization in planned, iterative phases:
+
+- [x] **Phase 1: Project Scaffolding & Build Cleanup**
+  * Update gitignore rules to recursively ignore local build/ IDE cache files (avoids 511+ untracked temporary files).
+  * Align gradle properties.
+- [ ] **Phase 2: UI Integration & Conflict Resolution**
+  * Merge the Organizer flow branches (`fredy-logic-layer` branch) into main.
+  * Resolve merge conflicts in the starting activity (`MainActivity.java`) and the `AndroidManifest.xml` registry.
+- [ ] **Phase 3: Database Extensions (SQLite Schema V2)**
+  * Increment schema version and implement a `comments` table.
+  * Enforce foreign key constraints and `ON DELETE CASCADE` rules so deleting events cleans up all child comments/attendees.
+  * Implement CRUD operations for comment persistence.
+- [ ] **Phase 4: MVVM Architecture Enforcement**
+  * Implement `EventRepository` and `UserRepository`.
+  * Implement `EventViewModel` and `UserViewModel` to bind data layers with dashboard activities.
+- [ ] **Phase 5: UI Polishing, Attendee Counting, and Testing**
+  * Connect Dashboards and Detail screens to corresponding ViewModels.
+  * Show live **Attendee Counts** on event detail panels.
+  * Connect persistent SQLite comments feed in Participant UI.
+  * Expand JUnit unit tests (`DatabaseHelperTest.java`) to assert referential integrity.
+
+---
+
 ## Project Overview
 EventSync is a native Android application designed to streamline campus event management. It provides a centralized, role-based platform for two types of users:
 * **Organizers:** Can create, edit, manage, and delete campus events.
